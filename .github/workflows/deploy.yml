@@ -1,10 +1,13 @@
 name: Deploy to GitHub Pages
 
-# Deploys the static game to GitHub Pages on every push to the dev branch.
+# This workflow is OPTIONAL. The simplest way to publish this game is:
+#   Settings → Pages → Source: "Deploy from a branch"
+#       → Branch: claude/aaa-mobile-fighting-game-nei2o1  /(root) → Save
+#
+# If instead you set  Settings → Pages → Source: "GitHub Actions",
+# then run this workflow (Actions tab → "Deploy to GitHub Pages" → Run workflow)
+# to publish automatically.
 on:
-  push:
-    branches:
-      - claude/aaa-mobile-fighting-game-nei2o1
   workflow_dispatch:
 
 permissions:
@@ -12,7 +15,6 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment.
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -26,18 +28,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the repository root (static site).
           path: '.'
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -8,9 +8,15 @@ install, no APK — it runs instantly in any modern browser on **phone and deskt
 > کوئی انسٹال نہیں — صرف لنک کھولیں اور کھیلیں۔ نیچے **HOW TO PLAY / کھیلنے کا طریقہ** دیکھیں۔
 
 ## ▶️ Live Demo
-Once GitHub Pages finishes building, the game is live at:
+After enabling GitHub Pages once (see **Publish** below), the game is live at:
 
-**https://kamijan44012-ux.github.io/tk/**
+**https://kamijan44012-ux.github.io/Tk/**
+
+### Publish (one-time, ~1 minute)
+1. Open **Settings → Pages**: https://github.com/kamijan44012-ux/Tk/settings/pages
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**.
+3. **Branch:** `claude/aaa-mobile-fighting-game-nei2o1`, folder **`/ (root)`** → **Save**.
+4. Wait ~1 minute, then open the live URL above. Done.
 
 ## 🎮 How to Play / کھیلنے کا طریقہ
 

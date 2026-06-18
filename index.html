@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0a0a14" />
+  <title>SHADOW STRIKERS — 3D Fighting Game</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Three.js loaded as an ES module from CDN via import map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- ====================== RENDER CANVAS ====================== -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- ====================== MAIN MENU ====================== -->
+  <section id="screen-menu" class="screen active">
+    <div class="menu-bg"></div>
+    <div class="menu-content">
+      <h1 class="game-title">SHADOW<span>STRIKERS</span></h1>
+      <p class="subtitle">3D ARENA COMBAT</p>
+      <div class="menu-buttons">
+        <button class="btn-primary" data-action="play">FIGHT</button>
+        <button class="btn-ghost" data-action="howto">HOW TO PLAY</button>
+      </div>
+      <p class="credit">Tap FIGHT to begin · Works on phone &amp; desktop</p>
+    </div>
+  </section>
+
+  <!-- ====================== HOW TO PLAY ====================== -->
+  <section id="screen-howto" class="screen">
+    <div class="panel">
+      <h2>HOW TO PLAY</h2>
+      <div class="howto-grid">
+        <div><b>Move</b><span>Left joystick / A · D keys</span></div>
+        <div><b>Jump</b><span>Joystick up / W key</span></div>
+        <div><b>Punch</b><span>P button / J key</span></div>
+        <div><b>Kick</b><span>K button / K key</span></div>
+        <div><b>Special</b><span>S button / L key (needs meter)</span></div>
+        <div><b>Block</b><span>B button / Space (hold)</span></div>
+        <div><b>Dodge</b><span>D button / Shift (double-tap)</span></div>
+        <div><b>Combo</b><span>Chain hits fast for bonus damage</span></div>
+      </div>
+      <button class="btn-primary" data-action="back-menu">BACK</button>
+    </div>
+  </section>
+
+  <!-- ====================== CHARACTER SELECT ====================== -->
+  <section id="screen-select" class="screen">
+    <div class="panel wide">
+      <h2>SELECT YOUR FIGHTER</h2>
+      <div id="char-grid" class="char-grid"><!-- filled by JS --></div>
+      <div class="select-footer">
+        <span id="select-hint">Pick a fighter</span>
+        <button id="confirm-fighter" class="btn-primary" disabled>CONFIRM</button>
+      </div>
+      <button class="btn-ghost small" data-action="back-menu">BACK</button>
+    </div>
+  </section>
+
+  <!-- ====================== ROUND BANNER ====================== -->
+  <div id="round-banner" class="banner"></div>
+
+  <!-- ====================== IN-GAME HUD ====================== -->
+  <section id="hud" class="screen hud">
+    <div class="hud-top">
+      <!-- Player health -->
+      <div class="fighter-status left">
+        <div class="hp-wrap"><div class="hp-damage" id="p1-hp-dmg"></div><div class="hp-fill" id="p1-hp"></div></div>
+        <div class="meter-wrap"><div class="meter-fill" id="p1-meter"></div></div>
+        <div class="name" id="p1-name">PLAYER</div>
+      </div>
+      <!-- Timer + rounds -->
+      <div class="hud-center">
+        <div class="timer" id="timer">99</div>
+        <div class="rounds">
+          <span class="round-pip" id="p1-r1"></span><span class="round-pip" id="p1-r2"></span>
+          <em>VS</em>
+          <span class="round-pip" id="p2-r1"></span><span class="round-pip" id="p2-r2"></span>
+        </div>
+      </div>
+      <!-- Enemy health -->
+      <div class="fighter-status right">
+        <div class="hp-wrap"><div class="hp-damage" id="p2-hp-dmg"></div><div class="hp-fill" id="p2-hp"></div></div>
+        <div class="meter-wrap"><div class="meter-fill" id="p2-meter"></div></div>
+        <div class="name" id="p2-name">CPU</div>
+      </div>
+    </div>
+
+    <!-- Combo popup -->
+    <div id="combo-pop" class="combo-pop"><b id="combo-num">0</b><span>HITS</span></div>
+
+    <!-- ============ TOUCH CONTROLS ============ -->
+    <div id="touch-controls" class="touch-controls">
+      <!-- Virtual joystick -->
+      <div id="joystick" class="joystick">
+        <div id="joystick-knob" class="joystick-knob"></div>
+      </div>
+      <!-- Action buttons -->
+      <div class="action-pad">
+        <button class="act-btn punch" data-btn="punch">P</button>
+        <button class="act-btn kick" data-btn="kick">K</button>
+        <button class="act-btn special" data-btn="special">S</button>
+        <button class="act-btn block" data-btn="block">B</button>
+        <button class="act-btn dodge" data-btn="dodge">D</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== MATCH RESULT ====================== -->
+  <section id="screen-result" class="screen">
+    <div class="panel">
+      <h2 id="result-title">YOU WIN</h2>
+      <p id="result-sub"></p>
+      <div class="menu-buttons">
+        <button class="btn-primary" data-action="rematch">REMATCH</button>
+        <button class="btn-ghost" data-action="back-menu">MAIN MENU</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Audio unlock hint for mobile -->
+  <div id="tap-to-start" class="tap-hint">TAP TO ENABLE SOUND</div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

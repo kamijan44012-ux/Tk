@@ -280,6 +280,11 @@ export class Fighter {
     if (this.actions.Idle) this.actions.Idle.setEffectiveWeight(this._locoIdle);
     if (this.actions.Walk) this.actions.Walk.setEffectiveWeight(this._locoWalk);
     if (this.actions.Run) this.actions.Run.setEffectiveWeight(this._locoRun);
+    // Walk forward toward the foe, but reverse the cycle when backing away
+    // (so retreating reads as a back-step instead of a moonwalk).
+    const dirSign = Math.abs(this.vx) > 0.05 ? (Math.sign(this.vx) === this.facing ? 1 : -1) : 1;
+    if (this.actions.Walk) this.actions.Walk.timeScale = dirSign;
+    if (this.actions.Run) this.actions.Run.timeScale = dirSign;
 
     // 3) Advance mocap clips (writes base pose into bones)
     this.mixer.update(dt);

@@ -11,7 +11,8 @@
   <script type="importmap">
   {
     "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      "three": "./vendor/three.module.js",
+      "three/addons/": "./vendor/addons/"
     }
   }
   </script>
@@ -128,6 +129,15 @@
 
   <!-- Audio unlock hint for mobile -->
   <div id="tap-to-start" class="tap-hint">TAP TO ENABLE SOUND</div>
+
+  <!-- Loading overlay (shown while the 3D fighter model streams in) -->
+  <div id="loading" class="loading">
+    <div class="loading-box">
+      <div class="loading-title">SHADOW STRIKERS</div>
+      <div class="loading-bar"><div id="loading-fill" class="loading-fill"></div></div>
+      <div id="loading-text" class="loading-text">Loading fighters…</div>
+    </div>
+  </div>
 
   <script type="module" src="js/main.js"></script>
 </body>

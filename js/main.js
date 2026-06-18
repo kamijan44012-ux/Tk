@@ -5,6 +5,7 @@
 import { Game } from './game.js';
 import { InputManager } from './input.js';
 import { audio } from './audio.js';
+import { assets } from './assets.js';
 import { ROSTER, getCharacter } from './characters.js';
 
 /* ---------------- Screen manager ---------------- */
@@ -85,6 +86,24 @@ input.init();
 const game = new Game(canvas, input, ui);
 
 let selectedChar = null;
+let assetsReady = false;
+
+/* Preload the rigged 3D fighter model before play is allowed. */
+(function preload() {
+  const fill = document.getElementById('loading-fill');
+  const text = document.getElementById('loading-text');
+  const overlay = document.getElementById('loading');
+  assets.load((p) => { fill.style.width = Math.round(p * 100) + '%'; })
+    .then(() => {
+      fill.style.width = '100%';
+      assetsReady = true;
+      setTimeout(() => overlay.classList.add('hidden'), 250);
+    })
+    .catch((err) => {
+      console.error(err);
+      text.textContent = 'Failed to load fighters. Please refresh.';
+    });
+})();
 
 /* Build character select cards */
 function buildSelect() {
@@ -149,6 +168,7 @@ document.getElementById('confirm-fighter').addEventListener('click', () => {
 });
 
 function startFight() {
+  if (!assetsReady) return;
   unlockAudio();
   const player = getCharacter(selectedChar || ROSTER[0].id);
   const enemy = randomEnemy(player.id);

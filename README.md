@@ -35,12 +35,17 @@ After enabling GitHub Pages once (see **Publish** below), the game is live at:
 - Best of 3 rounds. Empty the opponent's health bar or have more HP when the timer ends.
 
 ## ✨ Features
+- **Real rigged 3D human fighters** — an actual Mixamo-skeleton character model
+  (skinned mesh + bones), tinted per fighter. Locomotion uses genuine
+  **motion-capture** Idle / Walk / Run clips through an AnimationMixer.
+- **IK-driven combat** — punches, kicks and specials are produced by **CCD inverse
+  kinematics** on the real bones, so strikes actually reach toward the opponent and
+  the arm/elbow bend naturally, layered on top of the mocap base pose.
 - **Real combat system:** frame-data driven moves (startup / active / recovery),
   hitboxes vs hurtboxes, blocking with chip damage & blockstun, i-frame dodges,
   knockback, launchers, hitstop and camera shake for impact weight.
-- **Procedurally animated 3D fighters** — a full humanoid rig (torso, head, two-segment
-  arms & legs) animated by code for fluid 60fps punches, kicks, specials, hit reactions,
-  knockdowns and victory poses. No external model files required.
+- **Cinematic presentation:** dynamic fighting camera, ACES tone mapping, soft
+  shadows, bloom post-processing and energy-glow impact effects.
 - **4 fighters** with distinct stats (speed / power / defense): Blaze, Frost, Titan, Viper.
 - **AI opponent** that approaches, spaces, blocks and dodges, with meter-aware specials.
 - **Full UI:** main menu, character select, animated health bars, super meter,
